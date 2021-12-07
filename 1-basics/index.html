@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>Example 1</title>
+        <style type="text/css">
+            input[readonly] {
+                background: #EEE;
+            }
+        </style>
+    </head>
+    <body>
+    
+    <div id="element1">Wartość domyślna</div>
+    <br />
+    <div id="element2">Wartość domyślna</div>
+    <br />
+    
+    <p class="text">Trwa ładowanie</p>
+    
+    <input type="text" placeholder="Some custom text input" style="padding: 20px; width: 300px;" />
+    
+    <script type="text/javascript">
+    
+    //Iloczyn dwóch liczba
+    
+    function iloczyn(liczbaA, liczbaB) {
+        return liczbaA * liczbaB;
+    }
+    
+    let lA = 5;
+    let lB = 10;
+    
+    let result = iloczyn(lA + lB);
+    
+    console.log("Wynik iloczynu: ", result);
+
+    //Suma trzech liczb
+
+    //Funkcje można zapisać do zmiennej
+    let sumaFunc = function(liczbaA, liczbaB, liczbaC) {
+        return liczbaA + liczbaB + liczbaC;
+    };
+    
+    //const to stała, czyli "zmienna", której wartości nie można potem zmieniać
+    const wynikSumy = sumaFunc(2005, 104, 28);
+    console.log("Wynik sumy: ", wynikSumy);
+    
+    //Odwoływanie się do elementów HTML w JavaScript i sterowanie nimi
+    
+    document.getElementById('element1').innerText = "<b>element1</b>";
+    document.getElementById('element2').innerHTML = "<b>element2</b>";
+    
+    document.querySelector('body > div#element1').style.color = "red";
+    let element2 = document.querySelector('body > div#element2');
+    element2.style.fontSize = "32px";
+    
+    document.querySelectorAll('body > div[id]').forEach(function(currentElement) {
+        currentElement.style.textDecoration = "underline";
+    });
+    
+    //Wykonaj kod z opóźnieniem 2s (2000 w ms)
+    setTimeout(function() {
+        document.querySelector('input[type="text"]').setAttribute("readonly", true);
+    }, 2000);
+    
+    //Wykonuj co pół sekundy kod
+    setInterval(function() {
+        document.querySelector('p.text').innerText += '.';
+    }, 500);
+    
+    
+    </script>
+    </body>
+</html>
