@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html language="pl">
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Interactive site</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+        <style type="text/css">
+        
+            :root {
+                --site-padding: 20px;
+            }
+        
+            html, body {
+                margin: 0;
+                padding: 0;
+                font-family: "Roboto", sans-serif;
+            }
+            
+            .site-container {
+                position: relative;
+                width: calc(100% - (var(--site-padding) * 2));
+                padding: var(--site-padding);
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                gap: var(--site-padding);
+            }
+            
+            .site-area {
+                position: relative;
+                background: rgb(2,0,36);
+                background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(56,213,154,1) 0%, rgba(0,212,255,1) 100%);
+                border-radius: 15px;
+                border: 1px green solid;
+                display: flex;
+            }
+            
+            .site-container > .site-body {
+                display: flex;
+                gap: 20px;
+                min-height: 400px;
+            }
+            
+            .site-container > header {
+                width: 100%;
+                height: 180px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            
+            .site-container > header > h1 {
+                color: white;
+                text-shadow: -2px -2px #999;
+                font-size: 56px;
+            }
+            
+            .site-container > footer {
+                width: 100%;
+                height: 90px;
+            }
+            
+            .left-nav, .right-nav {
+                flex-grow: 0.75;
+            }
+            
+            .site-body .content {
+                flex-grow: 2;
+            }
+            
+            ul, ol, ul li, ol li {
+                list-style: none;
+                margin: 0; 
+                padding: 0;
+            }
+            
+            ul.menu {
+                width: 100%;
+                margin-top: 20px;
+            }
+            
+            ul.menu > li {
+                display: block;
+                
+                background: rgba(0, 155, 155, 0.5);
+                text-align: center;
+            }
+            
+            ul.menu > li > div {
+                background: rgba(0,0,0,0.5);
+                color: white;
+                padding: 10px 0;
+                cursor: pointer;
+            }
+            
+            ul.menu > li > div:hover {
+                background: rgba(0,0,0,0.7);
+            }
+            
+             ul.menu > li > ol {
+                height: 0px;
+                overflow: hidden;
+                transition: height 1s;
+             }
+             
+             ul.menu > li > ol.js-active {
+                height: 80px;
+             }
+             
+              ul.menu > li > ol > li {
+                cursor: pointer;
+                padding: 10px 0;
+              }
+              
+              ul.menu > li > ol > li:hover {
+                background: rgba(0,0,0,0.2);
+              }
+            
+            
+        </style>
+    </head>
+    <body>
+        <div class="site-container">
+            <header class="site-area">
+                <h1>Strona o Martinach</h1>
+            </header>
+            <div class="site-body">
+                <section class="left-nav site-area">
+                    <ul class="menu">
+                        <li>
+                            <div>Menu 1</div>
+                            <ol>
+                                <li>Link 1</li>
+                                <li>Link 2</li>
+                            </ol>
+                        </li>
+                        <li>
+                            <div>Menu 2</div>
+                            <ol>
+                                <li>Link 3</li>
+                                <li>Link 4</li>
+                            </ol>
+                        </li>
+                    </ul>
+                </section>
+                <section class="content site-area">
+                
+                </section>
+                <section class="right-nav site-area">
+                
+                </section>
+            </div>
+            <footer class="site-area">
+            
+            </footer>
+        </div>
+        <script type="text/javascript">
+            document.querySelectorAll('ul.menu > li > div').forEach(function(highestOption) { 
+            
+                highestOption.addEventListener('click', function(e) {
+                    let subMenu = e.target.parentNode.querySelector('ol');
+                    if (subMenu.classList.contains('js-active')) {
+                        subMenu.classList.remove('js-active');
+                        subMenu.style.height = "0px";
+                    } else {
+                        subMenu.classList.add('js-active');
+                        subMenu.style.height = (subMenu.childElementCount * 40) + "px";
+                    }
+                });
+            
+            });
+        </script>
+    </body>
+</html>
