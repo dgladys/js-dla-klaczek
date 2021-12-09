@@ -119,6 +119,19 @@
                 background: rgba(0,0,0,0.2);
               }
             
+        .content.site-area {
+            flex-direction: column;
+            max-width: 50%;
+        }
+        
+        .content.site-area p {
+            padding: 0 20px;
+            text-align: justify;
+        }
+        
+        .content.site-area h1 {
+            padding: 0 20px;
+        }
             
         </style>
     </head>
@@ -133,20 +146,20 @@
                         <li>
                             <div>Menu 1</div>
                             <ol>
-                                <li>Link 1</li>
-                                <li>Link 2</li>
+                                <li data-asynchronic-load="page1.html">Link 1</li>
+                                <li data-asynchronic-load="page2.html">Link 2</li>
                             </ol>
                         </li>
                         <li>
                             <div>Menu 2</div>
                             <ol>
-                                <li>Link 3</li>
-                                <li>Link 4</li>
+                                <li data-asynchronic-load="page1.html">Link 3</li>
+                                <li data-asynchronic-load="page2.html">Link 4</li>
                             </ol>
                         </li>
                     </ul>
                 </section>
-                <section class="content site-area">
+                <section class="content site-area" id="site-content">
                 
                 </section>
                 <section class="right-nav site-area">
@@ -158,6 +171,7 @@
             </footer>
         </div>
         <script type="text/javascript">
+            //Expand menu on click
             document.querySelectorAll('ul.menu > li > div').forEach(function(highestOption) { 
             
                 highestOption.addEventListener('click', function(e) {
@@ -170,8 +184,23 @@
                         subMenu.style.height = (subMenu.childElementCount * 40) + "px";
                     }
                 });
-            
             });
+
+            //Asynchronous load page
+            document.querySelectorAll('[data-asynchronic-load]').forEach(function(liItem) {
+                liItem.addEventListener('click', function(e) {
+                    let url = e.target.dataset.asynchronicLoad;
+                    
+                    var xmlHttp = new XMLHttpRequest();
+                    xmlHttp.open( "GET", url, false ); // false for synchronous request
+                    xmlHttp.send( null );
+
+                    let response = xmlHttp.responseText;
+                    document.getElementById('site-content').innerHTML = response;
+                });
+                
+            });
+
         </script>
     </body>
 </html>
